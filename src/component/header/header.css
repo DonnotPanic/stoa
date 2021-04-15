@@ -1,0 +1,50 @@
+.searchbar {
+    height: 2rem;
+    width: 8rem;
+    background-color: teal;
+    padding-right: 2vw;
+}
+
+.toggler {
+    display: inherit;
+    height: 2rem;
+    width: 2rem;
+    background-color: tan;
+    padding-right: 6vw;
+}
+
+.nav-bar {
+    display: none;
+    height: 2rem;
+    width: 20rem;
+    top: 0;
+    background-color: white;
+    padding-right: 6vw;
+    right: 0;
+}
+
+.header {
+    top: 0%;
+    display: flex;
+    position: sticky;
+    flex-direction: row-reverse;
+    justify-content: right;
+    align-items: center;
+    height: 4rem;
+    background-color: yellow;
+    z-index: 1000;
+    box-shadow: 0 .25rem .5rem rgba(0,0,0,.075)!important;
+}
+
+/* 电脑端以及 iPad 端 */
+@media screen and (min-width: 30rem) {
+    .toggler {
+        display: none;
+    }
+    .nav-bar {
+        display: inherit;
+    }
+    .header {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    }
+}

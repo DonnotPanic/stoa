@@ -1,0 +1,14 @@
+#code-copy {
+    position: absolute;
+    right: 10vw;
+    margin-top: 4vh;
+    transform: scale(2);
+}
+
+#copy-icon {
+    transition: transform 0.1s;
+}
+
+#copy-icon:hover {
+    transform: scale(1.4);
+}

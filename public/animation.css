@@ -1,0 +1,56 @@
+
+@keyframes loading {
+    0% {
+        transform: rotate(1turn);
+    }
+    50% {
+        transform: rotate(0.5turn);
+    }
+}
+
+.on-loading {
+    position: absolute;
+    top: calc(50% - 5vh);
+    left: calc(50% - 5vh);
+    max-height: 10vh;
+    max-width: 10vh;
+    transform-origin: center;
+    animation: loading 2s linear infinite;
+    animation-direction: reverse;
+}
+
+a {
+    text-decoration: underline;
+    display: inline-block;
+    position: relative;
+    color: black;
+    transition: color 0.3s, text-decoration 0.2s;
+    font-weight: bolder;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    color:dimgray;
+    font-weight: bolder;
+}
+
+a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    border-radius: 0.15rem;
+    background-color:rgb(52, 52, 52);
+    opacity: 0;
+    transform: scaleY(1.2);
+    transition: transform 0.2s, opacity 0.3s, background-color 0.2s;
+}
+
+a:hover::before, a:focus::before {
+    background-color: transparent;
+    opacity: 1;
+    transform: scaleX(1), scaleY(0.618);
+}
+

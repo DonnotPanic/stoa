@@ -1,0 +1,46 @@
+.blog-container {
+    display: inline-block;
+    overflow-x: hidden;
+    max-width: 90vw;
+    margin-top: 5vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    font-family: "JetBrains Mono", monospace;
+    background-color: whitesmoke;
+}
+
+.blog-container>h1 {
+    margin-top: 4rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.blog-container>h2 {
+    margin-top: 3rem;
+    text-indent: 2rem;
+}
+
+.blog-container>h3 {
+    margin-top: 3rem;
+    text-indent: 4rem;
+}
+
+.blog-container>p {
+    text-indent: 2rem;
+    hyphens: auto;
+    word-break: normal;
+    line-height: 150%;
+}
+
+.blog-container>pre {
+    max-width: 90vw;
+    font-variant-ligatures: normal;
+}
+
+.blog-container>pre::-webkit-scrollbar {
+    display: none;
+}
+
+.blog-container code {
+    font-family: 'JetBrains mono', monospace !important;
+}
