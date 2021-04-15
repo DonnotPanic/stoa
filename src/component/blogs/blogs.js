@@ -33,7 +33,7 @@ export default function Blog() {
                         <img src="image/loading.png" alt="ON LOADING..." />
                     </div>
                     : <>
-                        <div className="blog-container">
+                        <div className="blog-container blog-link">
                             <ReactMarkdown children={data}
                                 renderers={{ code: CodeBlock }}
                                 allowDangerousHtml />

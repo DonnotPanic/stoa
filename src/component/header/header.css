@@ -1,8 +1,47 @@
 .searchbar {
-    height: 2rem;
-    width: 8rem;
+    display: block;
+    background-color: transparent;
+    margin-right: 3vw;
+    padding: 0.3rem;
+    border-radius: 1.75rem;
+    transition: background-color 0.5s ease-in;
+}
+
+#search-input{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0.5rem;
+    color: white;
+    transition: width 0.4s ease-in-out;
+    width: 0rem;
+}
+
+.searchbar:hover {
     background-color: teal;
-    padding-right: 2vw;
+}
+
+.searchbar:hover>#search-input {
+    padding: 0.5rem;
+    width: max(6rem, 15vw);
+}
+
+#search-button {
+    display: flex;
+    float: right;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    transition: background-color 0.4s linear;
+}
+
+.searchbar:hover>#search-button {
+    background-color: white;
 }
 
 .toggler {
@@ -36,8 +75,12 @@
     box-shadow: 0 .25rem .5rem rgba(0,0,0,.075)!important;
 }
 
+.padding {
+    display: none;
+}
+
 /* 电脑端以及 iPad 端 */
-@media screen and (min-width: 30rem) {
+@media screen and (min-width: 40rem) {
     .toggler {
         display: none;
     }
@@ -46,5 +89,10 @@
     }
     .header {
         box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    }
+    .padding {
+        display: inherit;
+        display: flex;
+        height: 2rem;
     }
 }

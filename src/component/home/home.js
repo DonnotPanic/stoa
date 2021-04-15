@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 
-import md from '../../markdowns/intros/about.md'
+import md from '../../markdowns/intros/about.cn.md'
 import './home.css'
 
 function Home() {

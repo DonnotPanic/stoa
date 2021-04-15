@@ -5,11 +5,13 @@ katex = "true"
 series = ["Haskell","paradigm","programming"]
 +++ -->
 
+# CPS Tutorial For Kindergarteners
+
 > "It was a detour that was our shortest path"  
 >
 > ——*Julius·Caesar·Zeppeli*
 
-# Continuation
+## Continuation
 
 Edgar Dijkstra once serverely critisized the excessive use of `goto` statement in programming for that code that uses goto statements is harder to understand than alternative constructions. When I was still a freshman, I really found myself confused by that—— what can I do without `goto`? Well, your software teacher might have told you that, by  **structured program theorem**, the `goto` statement in programs which can be expressed as flowchart can be avoided by using the combination of the three programming constructs of `sequence` , ` selection/choice`, and `repetition/iteration` despite the fact that code duplication and additional variables may need to be introduced.
 

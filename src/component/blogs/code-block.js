@@ -10,13 +10,20 @@ import './code-block.css'
 export default function CodeBlock({ language, value }) {
     const [isCopied, setIsCopied] = useState(false);
 
+    const handleCopy = () => {
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 3000);
+    }
+
     return (
         <>
             <div id="code-copy">
                 {
                     isCopied
-                        ? <FontAwesomeIcon color="silver" icon={faClipboardCheck} />
-                        : <CopyToClipboard text={value} onCopy={() => setIsCopied(true)}>
+                        ? <FontAwesomeIcon color="silver" id="copyed-icon" icon={faClipboardCheck} />
+                        : <CopyToClipboard text={value} onCopy={handleCopy}>
                             <FontAwesomeIcon color="silver" id="copy-icon" icon={faClipboard}/>
                         </CopyToClipboard>
                 }
