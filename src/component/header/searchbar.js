@@ -1,33 +1,37 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { Observer, useLocalObservable } from 'mobx-react';
-import { action } from 'mobx'
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { action, autorun } from 'mobx'
+import { useLocalObservable, observer } from 'mobx-react-lite';
 
-import './header.css'
+import './searchbar.css'
 
-export default function Searchbar() {
+const Searchbar = observer(() => {
 
     const search = useLocalObservable(() => ({ value: "" }));
 
-    function handleChange(event) {
-        search.value = event.target.value;
-    }
+    const clearInput = action(() => search.value = "");
+
+    const handleChange = action((event) => search.value = event.target.value);
 
     return (
-        <Observer>
+        <div className="searchbar">
+            <input value={search.value} id="search-input"
+                onChange={handleChange} />
             {
-                () => (
-                    <div className="searchbar"
-                        onMouseLeave={action(() => search.value = "")}>
-                        <input value={search.value} id="search-input"
-                            onChange={action(handleChange)} />
-                        <button id="search-button">
-                            <FontAwesomeIcon icon={faSearch} color="black" />
-                        </button>
-                    </div>
-                )
+                (search.value !== "")
+                    ?
+                    <button className="cancel-button cancel" onClick={clearInput}>
+                        <FontAwesomeIcon className="search-cancel-icon" icon={faTimes} color="black" />
+                        <FontAwesomeIcon className="search-icon" icon={faSearch} color="black" />
+                    </button>
+                    :
+                    <button className="search-button" disabled>
+                        <FontAwesomeIcon  icon={faSearch} color="black" />
+                    </button>
             }
-        </Observer>
+        </div>
     );
-}
+});
+
+export default Searchbar;
