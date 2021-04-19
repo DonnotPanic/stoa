@@ -4,6 +4,7 @@
     padding-left: 4vw;
     padding-right: 4vw;
     font-family: "JetBrains Mono", monospace;
+    text-align: left;
 }
 
 .intro-container > h1 {

@@ -12,7 +12,10 @@ const Searchbar = observer(() => {
 
     const clearInput = action(() => search.value = "");
 
-    const handleChange = action((event) => search.value = event.target.value);
+    const handleChange = action((event) => {
+        if (search.value.length <= 30)
+            search.value = event.target.value;
+    });
 
     const isInputing = computed(() => search.value !== "");
 
@@ -29,7 +32,7 @@ const Searchbar = observer(() => {
                     </button>
                     :
                     <button className="search-button" disabled>
-                        <FontAwesomeIcon  icon={faSearch} color="black" />
+                        <FontAwesomeIcon icon={faSearch} color="black" />
                     </button>
             }
         </div>
