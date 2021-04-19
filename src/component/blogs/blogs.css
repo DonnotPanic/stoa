@@ -1,12 +1,16 @@
 .blog-container {
     display: inline-block;
+    text-align: left;
     overflow-x: hidden;
-    max-width: 90vw;
-    margin-top: 0vh;
+    max-width: 92vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
     padding-left: 4vw;
     padding-right: 4vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: whitesmoke;
+    outline: dashed rgba(0,0,0,0.3);
+    outline-offset: -0.4rem;
 }
 
 .blog-container>h1 {
@@ -33,7 +37,7 @@
 }
 
 .blog-container>pre {
-    max-width: 90vw;
+    max-width: 85vw;
     font-variant-ligatures: normal;
 }
 
@@ -59,4 +63,17 @@
 .blog-container p>code:hover {
     box-shadow: none;
     background-color: #c9c9c9;
+}
+
+@media screen and (min-width: 60rem) {
+    .blog-container {
+        margin-left: 4vw;
+        margin-right: 4vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        max-width: 40rem;
+        box-shadow: -1rem 0 1rem rgba(0,0,0,.075), 1rem 0 1rem rgba(0,0,0,.075);
+        border-radius: 0.3rem;
+        outline: none;
+    }
 }

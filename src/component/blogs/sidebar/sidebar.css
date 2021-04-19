@@ -1,0 +1,16 @@
+.sidebar {
+    display: none;
+    height: 10vh;
+    width: 20vw;
+    background-color: lavender;
+}
+
+@media screen and (min-width: 60rem) {
+    .sidebar {
+        display: block;
+        position: fixed;
+        top: 17vh;
+        left: 2rem;
+    }
+    
+}

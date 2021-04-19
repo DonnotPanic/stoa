@@ -5,7 +5,7 @@ import React, {
 import ReactMarkdown from 'react-markdown'
 
 import CodeBlock from './code-block'
-import Sidebar from '../sidebar/sidebar'
+import Sidebar from './sidebar/sidebar'
 import md from '../../markdowns/posts/CPS-tutorial-for-kindergarteners.md'
 import './blogs.css'
 
@@ -33,6 +33,7 @@ export default function Blog() {
                         <img src="image/loading.png" alt="ON LOADING..." />
                     </div>
                     : <>
+                        <Sidebar />
                         <div className="blog-container blog-link">
                             <ReactMarkdown children={data}
                                 renderers={{ code: CodeBlock }}

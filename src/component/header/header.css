@@ -12,7 +12,7 @@
     width: 20rem;
     top: 0;
     background-color: white;
-    padding-right: 6vw;
+    padding-right: 5vw;
     right: 0;
 }
 
@@ -23,7 +23,7 @@
     flex-direction: row-reverse;
     justify-content: right;
     align-items: center;
-    height: 4rem;
+    height: 6rem;
     background-color: yellow;
     z-index: 1000;
     box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .075)!important;
@@ -43,11 +43,15 @@
         display: inherit;
     }
     .header {
+        height: 4rem;
         box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
     }
     .padding {
         display: inherit;
         display: flex;
         height: 2rem;
+    }
+    .searchbar {
+        font-size: 1rem !important;
     }
 }

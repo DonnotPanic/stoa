@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { action, autorun } from 'mobx'
+import { action, autorun, computed } from 'mobx'
 import { useLocalObservable, observer } from 'mobx-react-lite';
 
 import './searchbar.css'
@@ -14,12 +14,14 @@ const Searchbar = observer(() => {
 
     const handleChange = action((event) => search.value = event.target.value);
 
+    const isInputing = computed(() => search.value !== "");
+
     return (
         <div className="searchbar">
             <input value={search.value} id="search-input"
                 onChange={handleChange} />
             {
-                (search.value !== "")
+                (isInputing.get())
                     ?
                     <button className="cancel-button cancel" onClick={clearInput}>
                         <FontAwesomeIcon className="search-cancel-icon" icon={faTimes} color="black" />
