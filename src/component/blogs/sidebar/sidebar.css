@@ -9,7 +9,7 @@
     .sidebar {
         display: block;
         position: fixed;
-        top: 17vh;
+        top: calc(5vh + 6rem);
         left: 2rem;
     }
     

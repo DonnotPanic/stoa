@@ -1,13 +1,15 @@
-+++
+<!-- +++
 date = "2021-03-26"
 title = "Subtyping：从 Lens 到 Row Polymorphism"
 katex = true
 series = ["OCaml","Haskell", "Row Poly", "programming"]
-+++
++++ -->
+
+# Subtyping：从 Lens 到 Row Polymorphism
 
 最近水群时看到群友在 Rust 里写 Lens ，突然想整理一篇水文谈谈相关的话题，虽然是从 Lens 到 Row Polymorphism ，本文并不会涉及 Lens 的技术细节，如果对 Lens 这一技术感兴趣，推荐 [Lens简介](https://zhuanlan.zhihu.com/p/337455794)或者 [Lens更长一点的简介](http://oleg.fi/gists/posts/2017-04-18-glassery.html) 。
 
-##  Subtyping and Structural typing
+## Subtyping and Structural typing
 
 时常有人说，面向对象优点非常多，封装、继承、多态，然而稍有常识的人一眼便能看出其中的端倪，多态当真是面向对象的特点吗？想想泛型好像也是一种多态哦？还是说，这里的多态其实是限定了继承关系的基类与派生类的类型上的联系？恭喜你，到这一步，你就离 **子类型（Subtype）** 的概念不远了。形式化地说，子类型是指一种类型多态的形式，即子类型可以替换为超类型执行超类型的操作。或者说，在超类型的环境下可以安全的使用子类型，即 liskov 替换原则。
 
@@ -77,6 +79,7 @@ val y : < get_x : int; hello : unit; set_x : int -> unit > = <obj>
      method virtual move : int * int -> unit
    end;;
 ```
+
 如果用 type class 的方式去定义：
 
 ```Haskell
@@ -155,9 +158,7 @@ instance Describable ItemWithDesc where ...
 
 是的，Lens 它来了，由于本文并不是针对 Lens 的科普文，所以会飞快的速度介绍完 Lens 的核心思想，然后大家各回各家，皆大欢喜。那么 Lens 到底是什么呢？
 
-{{< rawhtml >}}
-<center><img src="http://oleg.fi/gists/images/optics-hierarchy.svg" alt="Lens结构" />
-{{< /rawhtml >}}
+<center><img src="http://oleg.fi/gists/images/optics-hierarchy.svg" alt="Lens结构" /></center>
 
 直白的说 Lens 不过是对上述 getter、 setter 的花哨包装罢了。Lens 的核心组件包括Fold、Setter、Getter、Traversal、Lens、Review、Prism。看起来很复杂，不过实际使用却非常直观简洁。
 

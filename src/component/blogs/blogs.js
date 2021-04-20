@@ -3,10 +3,16 @@ import React, {
     useEffect,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypeRaw from 'rehype-raw'
+import 'katex/dist/katex.min.css'
 
 import CodeBlock from './code-block'
 import Sidebar from './sidebar/sidebar'
-import md from '../../markdowns/posts/CPS-tutorial-for-kindergarteners.md'
+import StyleLink from './stylelink'
+import md from '../../markdowns/tests/reference.md'
 import './blogs.css'
 
 
@@ -25,6 +31,11 @@ export default function Blog() {
         fetchData(md);
     }, []);
 
+    const components = {
+        a: StyleLink,
+        code: CodeBlock,
+    }
+
     return (
         <>
             {
@@ -35,9 +46,13 @@ export default function Blog() {
                     : <>
                         <Sidebar />
                         <div className="blog-container blog-link">
-                            <ReactMarkdown children={data}
-                                renderers={{ code: CodeBlock }}
-                                allowDangerousHtml />
+                            <ReactMarkdown
+                                remarkPlugins={[gfm, remarkMath]}
+                                rehypePlugins={[rehypeKatex, rehypeRaw]}
+                                children={data}
+                                components={components}
+                                allowDangerousHtml
+                            />
                         </div>
                     </>
             }

@@ -1,0 +1,33 @@
+.blog-link a {
+    text-indent: 0;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-skip-ink: none;
+    display: inline;
+    position: relative;
+    color: white;
+    mix-blend-mode: difference;
+    font-weight: bolder;
+
+}
+
+.link-span {
+    border-radius: .2em;
+    background-color: whitesmoke;
+    margin: .2em;
+    padding: 0;
+    transition: all .2s ease-in;
+}
+
+.blog-link .link-span:hover>a,
+.blog-link a:focus{
+    text-decoration: none;
+    transition: text-decoration .2s ease-in;
+}
+
+.link-span:hover,
+.link-span:focus-within {
+    background-color: black;
+    padding: .2em;
+    margin: 0;
+}
