@@ -9,10 +9,23 @@
     padding-right: 4vw;
     margin-left: 0;
     margin-right: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
     background-color: whitesmoke;
     outline: dashed rgba(0, 0, 0, 0.3);
     outline-offset: -0.4rem;
+}
+
+@media screen and (min-width: 60rem) {
+    .blog-container {
+        margin-left: 4vw;
+        margin-right: 4vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        max-width: 60vw;
+        box-shadow: -1rem 0 1rem rgba(0, 0, 0, .075), 1rem 0 1rem rgba(0, 0, 0, .075);
+        border-radius: 0.3rem;
+        outline: none;
+    }
 }
 
 .blog-container>h1 {
@@ -24,58 +37,41 @@
 .blog-container>h2 {
     margin-top: 3rem;
     text-indent: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
 }
 
 .blog-container>h3 {
     margin-top: 3rem;
     text-indent: 2rem;
+}
+
+.blog-container>h4, .blog-container>h5, .blog-container>h6 {
+    text-indent: 2rem;
     text-decoration: underline;
     text-decoration-skip-ink: none;
-    text-decoration-thickness: .15em;
+    text-decoration-thickness: 1px;
+    text-decoration-style: double;
 }
 
 .blog-container>p {
     text-indent: 2rem;
     hyphens: auto;
     word-break: normal;
-    line-height: 150%;
+    line-height: 200%;
 }
 
-.blog-container>pre {
-    max-width: 90vw;
-    font-variant-ligatures: normal;
-}
-
-.blog-container pre::-webkit-scrollbar {
-    display: none;
-}
-
-.blog-container code {
-    font-family: 'JetBrains mono', monospace !important;
-    user-select: all;
-}
-
-.blog-container p>code {
-    display: inline;
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
-    border-radius: 0.25rem;
-    background-color: #9e9e9e;
-    box-shadow: inset .2rem .2rem rgba(0, 0, 0, .075);
-}
-
-.blog-container p>code:hover {
-    box-shadow: none;
-    background-color: #c9c9c9;
-}
+/* table */
 
 .blog-container>table {
-    width: 100%;
+    width: calc(100% - 6vw);
+    margin: 3vw;
     border-collapse: collapse;
     border: .2rem solid #5D4037;
     box-shadow: 0 .4rem .2rem rgba(0, 0, 0, .075);
+}
+
+.blog-container tr:nth-child(odd) {
+    background-color: rgba(231, 140, 65, 0.21);
 }
 
 .blog-container th {
@@ -97,24 +93,67 @@
     box-shadow: inset 0 .1rem rgba(0, 0, 0, .075);
 }
 
-.blog-container td:active {
-    background-color: rgba(190, 85, 0, 0.2);
+/* ordered list */
+
+.blog-container ol, .blog-container ul {
+    padding-left: 2%;
 }
 
-.contains-task-list {
-    list-style-type: none;
-    margin-left: -2em;
+.blog-container ol {
+    counter-reset: inst;
 }
 
-@media screen and (min-width: 60rem) {
-    .blog-container {
-        margin-left: 4vw;
-        margin-right: 4vw;
-        padding-left: 2vw;
-        padding-right: 2vw;
-        max-width: 60vw;
-        box-shadow: -1rem 0 1rem rgba(0, 0, 0, .075), 1rem 0 1rem rgba(0, 0, 0, .075);
-        border-radius: 0.3rem;
-        outline: none;
+.blog-container li {
+    margin: 1em 0;
+    padding-top: 1em;
+    display: block;
+    position: relative;
+    text-indent: 1em;
+}
+
+.blog-container ol>li {
+    counter-increment: inst;
+}
+
+.blog-container li::before {
+    content: "*";
+    background: rgba(150, 150, 150, 0.35);
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    font-style: italic;
+    text-shadow: 1px 1px rgba(150, 150, 150, 0.5);
+    border-radius: 0 0.675em 0.675em 0;
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 0;
+    padding-left: 2.25%;
+    left: -5%;
+    top: -0.65em;
+    height: 1.35em;
+    width: 1.35em;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    z-index: 0;
+    text-indent: 0;
+}
+
+.blog-container ol>li::before {
+    background: rgba(255, 150, 0, 0.35);
+    text-shadow: 1px 1px rgba(255, 150, 0, 0.5);
+    content: counter(inst);
+}
+
+@media screen and (min-width: 33em) {
+    .blog-container li:before {
+        border-radius: 50%;
+        font-size: 1.5em;
+        height: 1.35em;
+        margin-left: 3.5%;
+        padding-left: 0;
+        padding-top: 0;
+        top: -0.15em;
+        width: 1.35em;
+        z-index: 0;
     }
 }

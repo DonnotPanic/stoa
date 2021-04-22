@@ -1,0 +1,19 @@
+.image-container {
+    display: block;
+}
+
+.blog-img {
+    cursor: zoom-in;
+}
+
+.blog-img {
+    display: block;
+    max-width: 60%;
+    margin: .5rem auto;
+}
+
+@media screen and (min-width: 60rem) {
+    .blog-img {
+        margin: 1rem auto;
+    }
+}

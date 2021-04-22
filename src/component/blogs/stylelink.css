@@ -8,13 +8,13 @@
     color: white;
     mix-blend-mode: difference;
     font-weight: bolder;
-
+    font-family: "Gloria Hallelujah", cursive;
 }
 
 .link-span {
     border-radius: .2em;
     background-color: whitesmoke;
-    margin: .2em;
+    margin: .3em;
     padding: 0;
     transition: all .2s ease-in;
 }
@@ -28,6 +28,6 @@
 .link-span:hover,
 .link-span:focus-within {
     background-color: black;
-    padding: .2em;
+    padding: .3em;
     margin: 0;
 }

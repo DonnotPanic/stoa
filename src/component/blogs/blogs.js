@@ -5,6 +5,7 @@ import React, {
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import remarkEmoji from 'remark-emoji'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
 import 'katex/dist/katex.min.css'
@@ -12,8 +13,13 @@ import 'katex/dist/katex.min.css'
 import CodeBlock from './code-block'
 import Sidebar from './sidebar/sidebar'
 import StyleLink from './stylelink'
+import WiredStyleCheckbox from './vendor/wired_checkbox'
+import WiredStyleImage from './vendor/wired_image'
+import StyleVideo from './vendor/react_video'
 import md from '../../markdowns/tests/reference.md'
+import './divider.css'
 import './blogs.css'
+import Divider from './divider'
 
 
 export default function Blog() {
@@ -34,6 +40,10 @@ export default function Blog() {
     const components = {
         a: StyleLink,
         code: CodeBlock,
+        hr: Divider,
+        input: WiredStyleCheckbox,
+        img: WiredStyleImage,
+        video: StyleVideo
     }
 
     return (
@@ -47,11 +57,10 @@ export default function Blog() {
                         <Sidebar />
                         <div className="blog-container blog-link">
                             <ReactMarkdown
-                                remarkPlugins={[gfm, remarkMath]}
+                                remarkPlugins={[gfm, remarkMath, remarkEmoji]}
                                 rehypePlugins={[rehypeKatex, rehypeRaw]}
                                 children={data}
                                 components={components}
-                                allowDangerousHtml
                             />
                         </div>
                     </>

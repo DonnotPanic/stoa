@@ -92,7 +92,7 @@ will produce
 * [ ] list syntax required
 * [ ] normal **formatting**, @mentions, #1234 refs
 * [ ] incomplete
-* [x] completed
+* [x] ~~completed~~
 
 You can change the complete/incomplete state by clicking on the checkbox before the item.
 
@@ -269,7 +269,7 @@ In Typora, they will be rendered like so:
 
 This is [an example][id] reference-style link.
 
-[id]: http://example.com/	"Optional Title Here"
+[id]: http://example.com/ "Optional Title Here"
 
 The implicit link name shortcut allows you to omit the name of the link, in which case the link text itself is used as the name. Just use an empty set of square brackets — for example, to link the word “Google” to the google.com web site, you could simply write:
 
@@ -300,7 +300,7 @@ Images have similar syntax as links, but they require an additional `!` char bef
 ![Alt text](/path/to/img.jpg "Optional title")
 ```
 
-![test](/image/test.jpg)
+![test](/image/test.jpg "TEST")
 
 You are able to use drag & drop to insert an image from an image file or your web browser. You can modify the markdown source code by clicking on the image. A relative path will be used if the image that is added using drag & drop is in same directory or sub-directory as the document you're currently editing.
 
@@ -335,6 +335,8 @@ To produce a literal asterisk or underscore at a position where it would otherwi
 ``` markdown
 \*this text is surrounded by literal asterisks\*
 ```
+
+\*this text is surrounded by literal asterisks\*
 
 Typora recommends using the `*` symbol.
 
@@ -388,7 +390,7 @@ User can trigger auto-complete suggestions for emoji by pressing `ESC` key, or t
 
 ### Inline Math
 
-To use this feature, please enable it first in the `Preference` Panel -> `Markdown` Tab. Then, use `$` to wrap a TeX command. For example: `$\lim_{x \to \infty} \exp(-x) = 0$` will be rendered as LaTeX command.
+To use this feature, please enable it first in the `Preference` Panel -> `Markdown` Tab. Then, use `$` to wrap a TeX command. For example: `$\lim_{x \to \infty} \exp(-x) = 0$` will be rendered as LaTeX command as $\lim_{x \to \infty} \exp(-x) = 0$.
 
 To trigger inline preview for inline math: input “$”, then press the `ESC` key, then input a TeX command.
 
@@ -425,6 +427,16 @@ You can use the `<video>` HTML tag to embed videos. For example:
 ```Markdown
 <video src="xxx.mp4" />
 ```
+
+<video controls>
+  <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" type="video/mp4">
+  Your browser does not support it
+</video>
+
+inline iframe
+
+<iframe src="//player.bilibili.com/player.html?aid=67379972&bvid=BV13J411P7sJ&cid=116829104&page=1" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
+
 
 ### Other HTML Support
 

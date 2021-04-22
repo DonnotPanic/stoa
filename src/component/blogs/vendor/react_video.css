@@ -1,0 +1,9 @@
+.blog-video {
+    display: flex;
+    margin: 1em auto;
+    justify-content: center;
+}
+
+.blog-video video{
+    width: 100%;
+}
