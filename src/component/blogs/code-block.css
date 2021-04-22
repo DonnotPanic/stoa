@@ -1,17 +1,17 @@
-.blog-container pre {
+#blog-container pre {
     max-width: 90vw;
     font-variant-ligatures: normal;
 }
 
-.blog-container pre::-webkit-scrollbar {
+#blog-container pre::-webkit-scrollbar {
     display: none;
 }
 
-.blog-container code {
+#blog-container code {
     font-family: 'JetBrains mono', monospace !important;
 }
 
-.blog-container p>code {
+#blog-container p>code {
     display: inline;
     margin-left: 0.2rem;
     margin-right: 0.2rem;
@@ -22,7 +22,7 @@
     line-break: anywhere;
 }
 
-.blog-container p>code:hover {
+#blog-container p>code:hover {
     box-shadow: inset .2rem .3rem rgba(0, 0, 0, .075);
     background-color: rgb(190, 190, 190);
 }

@@ -1,6 +1,7 @@
 import React, {
     useState,
     useEffect,
+    forwardRef
 } from 'react'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
@@ -21,8 +22,8 @@ import './divider.css'
 import './blogs.css'
 import Divider from './divider'
 
+const Blog = forwardRef((props, ref) => {
 
-export default function Blog() {
     const [data, setdata] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
@@ -55,7 +56,7 @@ export default function Blog() {
                     </div>
                     : <>
                         <Sidebar />
-                        <div className="blog-container blog-link">
+                        <div ref={ref} id="blog-container" className="blog-link">
                             <ReactMarkdown
                                 remarkPlugins={[gfm, remarkMath, remarkEmoji]}
                                 rehypePlugins={[rehypeKatex, rehypeRaw]}
@@ -67,4 +68,6 @@ export default function Blog() {
             }
         </>
     )
-}
+})
+
+export default Blog;
