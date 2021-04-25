@@ -428,15 +428,14 @@ You can use the `<video>` HTML tag to embed videos. For example:
 <video src="xxx.mp4" />
 ```
 
+<!-- 
 <video controls>
   <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" type="video/mp4">
-  Your browser does not support it
 </video>
 
 inline iframe
 
-<iframe src="//player.bilibili.com/player.html?aid=67379972&bvid=BV13J411P7sJ&cid=116829104&page=1" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
-
+<iframe src="//player.bilibili.com/player.html?aid=67379972&bvid=BV13J411P7sJ&cid=116829104&page=1" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe> -->
 
 ### Other HTML Support
 

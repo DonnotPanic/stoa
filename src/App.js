@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom'
 
 import './App.css';
-import Blog from './component/blogs/blogs'
-import Home from './component/home/home'
-import Header from './component/header/header'
+import Blog from './components/blogs/blogs'
+import Home from './components/home/home'
+import Header from './components/header/header'
 
 export const BlogContext = createContext();
 
@@ -17,8 +17,8 @@ function App() {
   const blogRef = useRef()
 
   return (
-    <HashRouter>
-      <BlogContext.Provider value={blogRef} >
+    <BlogContext.Provider value={blogRef} >
+      <HashRouter>
         <Header />
         <Switch>
           <Route exact path="/">
@@ -28,8 +28,8 @@ function App() {
             <Blog ref={blogRef} />
           </Route>
         </Switch>
-      </BlogContext.Provider>
-    </ HashRouter>
+      </ HashRouter>
+    </BlogContext.Provider>
   );
 }
 

@@ -22,7 +22,7 @@ import './divider.css'
 import './blogs.css'
 import Divider from './divider'
 
-const Blog = forwardRef((props, ref) => {
+const Blog = forwardRef((_, ref) => {
 
     const [data, setdata] = useState("");
     const [isLoading, setIsLoading] = useState(true);

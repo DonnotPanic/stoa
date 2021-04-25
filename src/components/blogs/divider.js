@@ -13,7 +13,7 @@ export default function Divider({ node, ...props }) {
     const blogContainer = useContext(BlogContext);
 
     const getClassName = useCallback(() => {
-        const containerWidth = blogContainer.current.clientWidth;
+        const containerWidth = blogContainer.current ? blogContainer.current.clientWidth : 0;
         if (containerWidth >= 960) {
             setClassName("large");
         } else if (containerWidth >= 810) {
