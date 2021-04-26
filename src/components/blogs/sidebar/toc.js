@@ -55,9 +55,8 @@ const RenderList = (props) => {
                 </Link>
                 {
                     e.children
-                        ? <button className="fold-button" tabIndex='-1' disabled>
-                            <FontAwesomeIcon icon={faDown}
-                                className={e.isCollapsed ? "flipped" : ""} />
+                        ? <button className={"fold-button" + (e.isCollapsed ? "flipped" : "")} tabIndex='-1' disabled>
+                            <FontAwesomeIcon icon={faDown} />
                         </button> : null
                 }
             </List.Content>
@@ -184,19 +183,20 @@ export default function Toc() {
             let item = undefined;
             if (target)
                 item = [...flatContents].find(e => decodeURI(e.innerText) === target.val);
-            if (item) {
-                for (let v of flatContents) {
-                    v.isCollapsed = true;
-                    v.focused = false;
-                }
-                item.focused = true;
-                let tmp = item;
-                while (tmp) {
-                    tmp.isCollapsed = false;
-                    tmp = tmp.parent;
-                }
-                setFocus(item.innerText);
+            if (!item) {
+                item = [...flatContents][0];
             }
+            for (let v of flatContents) {
+                v.isCollapsed = true;
+                v.focused = false;
+            }
+            item.focused = true;
+            let tmp = item;
+            while (tmp) {
+                tmp.isCollapsed = false;
+                tmp = tmp.parent;
+            }
+            setFocus(item.innerText);
         }
         window.addEventListener('scroll', scrollCur);
         return (() => {

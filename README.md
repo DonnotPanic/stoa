@@ -27,10 +27,10 @@
 - [x] 列表
 - [x] emoji
 - [x] 视频
-- [ ] 滚动 head
+- [x] 滚动 head
+- [x] toc ( markdown目录跳转)
 - [ ] 字体打包
-- [ ] sidebar（能否实现markdown目录跳转？
-- [ ] toc
+- [ ] sidebar
 - [ ] 图片（懒加载
 - [ ] 博客列表
 - [ ] 博客间跳转
