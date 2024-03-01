@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react'
-import { NavHashLink as Link } from 'react-router-hash-link'
+import { HashLink as Link } from 'react-router-hash-link'
 import { List } from 'semantic-ui-react'
 import { throttle } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -45,7 +45,7 @@ const RenderList = (props) => {
     const val = !props.list ? null : props.list.map((e, i) => (
         <List.Item key={props.prefix + String(i)} className={e.focused ? "focused" : ""}>
             <List.Content>
-                <Link smooth to={{ pathname: '', hash: e.innerText }}
+                <Link smooth to={'#'+ e.innerText}
                     scroll={el => scrollWidthOffset(el)}
                     onClick={handleFold(e)}
                     onKeyUp={k => ((k.key === "Enter") ? handleFold(e)() : null)}

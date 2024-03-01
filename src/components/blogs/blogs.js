@@ -40,7 +40,7 @@ const injection = data => {
 }
 
 const Blog = forwardRef((_, ref) => {
-    const [cnt, setCnt] = useState(0);
+    const buff = [];
     const [sources, setSources] = useState([]);
     const [lightboxState, setLightboxState] = useState({toggler:false, sourceIndex:0});
     const [data, setData] = useState("");
@@ -58,22 +58,6 @@ const Blog = forwardRef((_, ref) => {
         fetchData(md);
     }, []);
 
-    useEffect(()=>{
-        setCnt(sources.length);
-    },[sources])
-
-    const updateSrc = src => {
-        if (sources.indexOf(src) === -1) {
-            if (sources.length === cnt) {
-                setSources(s => s.concat([src]));
-            } else {
-                setTimeout(() => {
-                    updateSrc(src)
-                }, 0);
-            }
-        }
-    }
-
     const hanldeSlide = index => {
         setLightboxState({
             toggler: !lightboxState.toggler,
@@ -87,9 +71,7 @@ const Blog = forwardRef((_, ref) => {
         hr: Divider,
         input: WiredStyleCheckbox,
         img: ({src, ...args}) => {
-            let t = 0;
-            if (sources.indexOf(src) === -1) updateSrc(src);
-            return(<WiredStyleImage src={src} sources={sources} setSlide={hanldeSlide} {...args}/>);
+            return(<WiredStyleImage src={src} sources={sources} setSources={setSources} setSlide={hanldeSlide} {...args}/>);
         },
         video: StyleVideo
     }
