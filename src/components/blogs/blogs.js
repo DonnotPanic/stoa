@@ -40,7 +40,7 @@ const injection = data => {
 }
 
 const Blog = forwardRef((_, ref) => {
-    const [buffer, setBuffer] = useState("");
+    const [cnt, setCnt] = useState(0);
     const [sources, setSources] = useState([]);
     const [lightboxState, setLightboxState] = useState({toggler:false, sourceIndex:0});
     const [data, setData] = useState("");
@@ -58,15 +58,20 @@ const Blog = forwardRef((_, ref) => {
         fetchData(md);
     }, []);
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (buffer && sources.indexOf(buffer) === -1)
-                setSources([buffer].concat(sources));
-        }, 10);
-    } ,[buffer]);
+    useEffect(()=>{
+        setCnt(sources.length);
+    },[sources])
 
     const updateSrc = src => {
-        setTimeout(() => setBuffer(src), 10);
+        if (sources.indexOf(src) === -1) {
+            if (sources.length === cnt) {
+                setSources(s => s.concat([src]));
+            } else {
+                setTimeout(() => {
+                    updateSrc(src)
+                }, 0);
+            }
+        }
     }
 
     const hanldeSlide = index => {

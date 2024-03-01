@@ -17,7 +17,7 @@ export default function WiredStyleImage({node, src, alt, setSlide, sources, titl
         <>
             <span onClick={() => setSlide(index)} className="image-container">
                 <WiredImage elevation={3} className='blog-img' src={src} {...props}/>
-                <text className="image-legend">{"Fig "+ (index+1) + ": " + title}</text>
+                <span className="image-legend">{"Fig "+ (index+1) + ": " + title}</span>
             </span>
         </>
     )
