@@ -302,6 +302,10 @@ Images have similar syntax as links, but they require an additional `!` char bef
 
 ![test](/image/test.jpg "TEST")
 
+![test1](/image/test_copy.jpg "TEST1")
+
+![test2](/image/test_copy_2.jpg "TEST2")
+
 You are able to use drag & drop to insert an image from an image file or your web browser. You can modify the markdown source code by clicking on the image. A relative path will be used if the image that is added using drag & drop is in same directory or sub-directory as the document you're currently editing.
 
 If you’re using markdown for building websites, you may specify a URL prefix for the image preview on your local computer with property `typora-root-url` in YAML Front Matters. For example, input `typora-root-url:/User/Abner/Website/typora.io/` in YAML Front Matters, and then `![alt](/blog/img/test.png)` will be treated as `![alt](file:///User/Abner/Website/typora.io/blog/img/test.png)` in Typora.

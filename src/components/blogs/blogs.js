@@ -3,6 +3,7 @@ import React, {
     useEffect,
     forwardRef
 } from 'react'
+import FslightBox from 'fslightbox-react';
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -28,7 +29,7 @@ const injection = data => {
         s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
         s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
         s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
-        return s.split(' ').filter(function(str){return str!="";}).length;
+        return s.split(' ').filter(function(str){return str !== "";}).length;
         //return s.split(' ').filter(String).length; - this can also be used
     }
     let wordNum = wordCount(data);
@@ -39,27 +40,52 @@ const injection = data => {
 }
 
 const Blog = forwardRef((_, ref) => {
-
-    const [data, setdata] = useState("");
+    const [buffer, setBuffer] = useState("");
+    const [sources, setSources] = useState([]);
+    const [lightboxState, setLightboxState] = useState({toggler:false, sourceIndex:0});
+    const [data, setData] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData(md) {
-            console.log("fetch cps.md");
+            console.log("fetch ref.md");
+
             await fetch(md)
                 .then(r => r.text())
-                .then(text => setdata(injection(text)));
+                .then(text => setData(injection(text)));
             setIsLoading(false);
         }
         fetchData(md);
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (buffer && sources.indexOf(buffer) === -1)
+                setSources([buffer].concat(sources));
+        }, 10);
+    } ,[buffer]);
+
+    const updateSrc = src => {
+        setTimeout(() => setBuffer(src), 10);
+    }
+
+    const hanldeSlide = index => {
+        setLightboxState({
+            toggler: !lightboxState.toggler,
+            sourceIndex: index
+        });
+    }
 
     const components = {
         a: StyleLink,
         code: CodeBlock,
         hr: Divider,
         input: WiredStyleCheckbox,
-        img: WiredStyleImage,
+        img: ({src, ...args}) => {
+            let t = 0;
+            if (sources.indexOf(src) === -1) updateSrc(src);
+            return(<WiredStyleImage src={src} sources={sources} setSlide={hanldeSlide} {...args}/>);
+        },
         video: StyleVideo
     }
 
@@ -71,6 +97,10 @@ const Blog = forwardRef((_, ref) => {
                         <img src="image/loading.png" alt="ON LOADING..." />
                     </div>
                     : <>
+                        <div className='zooming-wrapper'>
+                            <FslightBox className="blog-img-zoom" toggler={lightboxState.toggler} 
+                            sourceIndex={lightboxState.sourceIndex} sources={sources} />
+                        </div>
                         <div ref={ref} id="blog-container" className="blog-link">
                             <Markdown
                                 remarkPlugins={[gfm, remarkMath, remarkEmoji]}

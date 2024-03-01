@@ -1,19 +1,24 @@
-import React, {useState} from 'react';
-import FslightBox from 'fslightbox-react';
+import React, {useState, useEffect} from 'react';
+
 import { WiredImage } from 'react-wired-elements';
 import './wired_image.css';
 
-export default function WiredStyleImage({ node, src, alt, ...props }) {
-    const [toggler, setToggler] = useState(false);
+export default function WiredStyleImage({node, src, alt, setSlide, sources, title, ...props}) {
+
+    const [index, setIndex] = useState(-1);
+
+    useEffect(()=>{
+        let t;
+        if(sources) t = sources.indexOf(src);
+        if(index < 0 && t >= 0) setIndex(t);
+    }, [sources])
 
     return (
         <>
-            <FslightBox lassName="blog-img-zoom" toggler={toggler} sources={[src]} alt={alt} />
-            <span onClick={() => setToggler(!toggler)} className="image-container">
+            <span onClick={() => setSlide(index)} className="image-container">
                 <WiredImage elevation={3} className='blog-img' src={src} {...props}/>
-                <text className="image-legend">{"Fig T: " + alt}</text>
+                <text className="image-legend">{"Fig "+ (index+1) + ": " + title}</text>
             </span>
         </>
-
     )
 }
