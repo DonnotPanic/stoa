@@ -8,10 +8,8 @@ export default function Sidebar() {
 
     return (
         <div className="sidebar">
-            !!!TOC!!!
-            <Toc>
-
-            </Toc>
+            <span className='content'>CONTENT</span>
+            <Toc />
         </div>
     )
 }

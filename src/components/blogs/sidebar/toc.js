@@ -3,7 +3,7 @@ import { NavHashLink as Link } from 'react-router-hash-link'
 import { List } from 'semantic-ui-react'
 import { throttle } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown as faDown } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 import { BlogContext } from '../../../App'
 import './toc.css'
@@ -31,7 +31,7 @@ const RenderList = (props) => {
     }
 
     const scrollWidthOffset = (el) => {
-        const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+        const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
         const yOffset = -document.getElementById('header').clientHeight;
         window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
         throttle(() => {
@@ -45,7 +45,7 @@ const RenderList = (props) => {
     const val = !props.list ? null : props.list.map((e, i) => (
         <List.Item key={props.prefix + String(i)} className={e.focused ? "focused" : ""}>
             <List.Content>
-                <Link smooth to={{ pathname: document.location.href.split('#')[1], hash: e.innerText }}
+                <Link smooth to={{ pathname: '', hash: e.innerText }}
                     scroll={el => scrollWidthOffset(el)}
                     onClick={handleFold(e)}
                     onKeyUp={k => ((k.key === "Enter") ? handleFold(e)() : null)}
@@ -55,8 +55,8 @@ const RenderList = (props) => {
                 </Link>
                 {
                     e.children
-                        ? <button className={"fold-button" + (e.isCollapsed ? "flipped" : "")} tabIndex='-1' disabled>
-                            <FontAwesomeIcon icon={faDown} />
+                        ? <button className={"fold-button" + (!e.isCollapsed ? " invisible" : "")} tabIndex='-1' disabled >
+                            <FontAwesomeIcon icon={faEllipsisH} />
                         </button> : null
                 }
             </List.Content>
@@ -132,7 +132,6 @@ export default function Toc() {
     const [contents, setContents] = useState([]);
     const [offsets, setOffsets] = useState([]);
     const [headOffset, setHeadOffset] = useState("");
-    const [blogTitle, setBlogTitle] = useState("");
     const [focus, setFocus] = useState("");
 
     let blogContainer = useContext(BlogContext);
@@ -152,19 +151,20 @@ export default function Toc() {
         let offsets = tmp.map(e => ({ val: e.innerText, offset: e.offsetTop }));
         setOffsets(offsets);
         setContents(deserList(tmp));
-        setBlogTitle(blogContainer.current.children[0].innerText);
-        setHeadOffset(document.getElementById("header").clientHeight);
+        let containerOffset = document.getElementById("blog-container").offsetTop;
+        let headerHeight = document.getElementById("header").offsetHeight;
+        setHeadOffset(containerOffset - headerHeight);
     }, [blogContainer]);
 
     const getFocus = useCallback(
         () => {
             let top = document.documentElement.scrollTop;
-            let offset = top + headOffset;
+            let offset = top - headOffset + 40; //small padding
             let l = 0, r = offsets.length - 1;
             while (l <= r) {
                 let m = (l + r) >> 1;
                 let cur = offsets[m].offset;
-                if (cur === offsets) {
+                if (cur === offset) {
                     return offsets[m];
                 } else if (cur < offset) {
                     l = m + 1;
@@ -190,7 +190,7 @@ export default function Toc() {
                 v.isCollapsed = true;
                 v.focused = false;
             }
-            item.focused = true;
+            if (item !== undefined) item.focused = true;
             let tmp = item;
             while (tmp) {
                 tmp.isCollapsed = false;
@@ -206,9 +206,6 @@ export default function Toc() {
 
     return (
         <div id="table-of-content">
-            <button id="toc-title">
-                {blogTitle}
-            </button>
             {
                 <RenderList list={contents} focus={focus} />
             }

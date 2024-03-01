@@ -24,6 +24,6 @@
 }
 
 .task-list-item>del {
-    text-decoration-thickness: .13em;
+    text-decoration-thickness: .11em;
     text-decoration-style: double;
 }

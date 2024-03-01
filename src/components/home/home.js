@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown'
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 import md from '../../markdowns/intros/about.cn.md'
 import './home.css'
@@ -28,7 +29,7 @@ function Home() {
                         <img src="image/loading.png" alt="ON LOADING..."/>
                         </div>
                     : <div className="intro-container">
-                        <ReactMarkdown children={data} allowDangerousHtml />
+                        <Markdown children={data} rehypePlugins={[rehypeRaw]}/>
                     </div>
             }
         </>

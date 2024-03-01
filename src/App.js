@@ -1,7 +1,7 @@
 import React, { createContext, useRef } from 'react'
 import {
-  HashRouter,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
 } from 'react-router-dom'
 
@@ -18,17 +18,13 @@ function App() {
 
   return (
     <BlogContext.Provider value={blogRef} >
-      <HashRouter>
+      <BrowserRouter>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/blogs">
-            <Blog ref={blogRef} />
-          </Route>
-        </Switch>
-      </ HashRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Blog ref={blogRef} />} />
+        </Routes>
+      </ BrowserRouter>
     </BlogContext.Provider>
   );
 }

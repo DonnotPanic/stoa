@@ -5,7 +5,7 @@
 
 @media screen and (min-width: 60rem) {
     .sidebar {
-        overflow-y: scroll;
+        overflow-y: hidden;
         overscroll-behavior: contain;
         overflow-x: hidden;
         position: fixed;
@@ -17,6 +17,11 @@
         justify-content: left;
         text-align: left;
         top: 4rem;
-        left: 0;
+        right: 0;
     }
+}
+
+.sidebar>.content {
+    font-family: 'KaTeX_Main';
+    font-size: x-large;
 }

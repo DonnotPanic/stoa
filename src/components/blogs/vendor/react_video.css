@@ -2,4 +2,12 @@
     display: flex;
     margin: 1em auto;
     justify-content: center;
+    height: 20rem;
+}
+
+@media screen and (min-width: 60rem) {
+    .blog-video {
+        height: 30rem;
+    }
+    
 }

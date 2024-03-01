@@ -1,7 +1,7 @@
 .toc-list a {
     text-decoration: none;
     cursor: pointer;
-    color: blue;
+    color: grey;
 }
 
 .toc-list a:hover {
@@ -10,9 +10,12 @@
 }
 
 #table-of-content {
+    
     max-width: inherit;
     width: 25vw;
+    margin-top: 1rem;
     margin-bottom: 2rem;
+    padding-right: 2rem;
 }
 
 #table-of-content button, .fold-button {
@@ -22,11 +25,11 @@
 
 .fold-button {
     position: absolute;
-    right: 1rem;
+    right: 0;
 }
 
-.fold-button.flipped {
-    transform: rotate(0.5turn);
+.fold-button.invisible {
+    visibility: hidden;
 }
 
 .title-on-focus {
@@ -52,7 +55,10 @@
     padding-left: 0.5em;
 }
 
-#table-of-content .focused {
-    background-color: rgba(0, 0, 255, 0.4);
+#table-of-content .focused>.content, #table-of-content .focused::before {
     font-weight: bolder;
+}
+
+#table-of-content .focused>.content>a {
+    color: black;
 }

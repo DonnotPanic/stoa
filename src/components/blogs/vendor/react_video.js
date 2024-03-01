@@ -22,8 +22,9 @@ export default function StyleVideo({ node, src, type, children, ...props }) {
 
     return (
         <ReactPlayer
+            width="fit-content"
+            height="revert-layer"
             className="blog-video" url={url}
-            width='100%' height='100%'
             {...props}
         />
     )

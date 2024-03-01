@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -7,11 +7,10 @@ import { faClipboard, faClipboardCheck } from '@fortawesome/free-solid-svg-icons
 import './code-block.css'
 
 export default function CodeBlock({ node, inline, className, children, ...args }) {
-    const value = children[0]
+    const value = String(children).replace(/\n$/, '');
     const [isCopied, setIsCopied] = useState(false);
 
     const match = /language-(\w+)/.exec(className || '');
-    const language = match ? match[1] : "text";
 
     const handleCopy = () => {
         setIsCopied(true);
@@ -20,10 +19,12 @@ export default function CodeBlock({ node, inline, className, children, ...args }
         }, 3000);
     }
 
+
+    
     return (
         <>
             {
-                !inline
+                !inline && match
                     ? <>
                         <div id="code-copy">
                             {
@@ -34,9 +35,12 @@ export default function CodeBlock({ node, inline, className, children, ...args }
                                     </CopyToClipboard>
                             }
                         </div>
-                        <SyntaxHighlighter language={language} style={dark} {...args}>
-                            {value}
-                        </SyntaxHighlighter>
+                        <SyntaxHighlighter
+                            PreTag="div"
+                            children={value}
+                            language={match[1]}
+                            style={dark}
+                            {...args} />
                     </>
                     : <code className={className} {...args}>{value}</code>
             }

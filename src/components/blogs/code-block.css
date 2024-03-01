@@ -29,9 +29,19 @@
 
 #code-copy {
     position: absolute;
-    right: 10vw;
-    margin-top: 1.3em;
+    right: 12vw;
+    margin-top: 1.5em;
     transform: scale(1.9);
+}
+
+
+@media screen and (min-width: 60rem) {
+    #code-copy {
+        position: absolute;
+        right: 6vw;
+        margin-top: 1.5em;
+        transform: scale(1.9);
+    }
 }
 
 #copy-icon {

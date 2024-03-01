@@ -3,7 +3,7 @@ import React, {
     useEffect,
     forwardRef
 } from 'react'
-import ReactMarkdown from 'react-markdown'
+import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkEmoji from 'remark-emoji'
@@ -22,6 +22,22 @@ import './divider.css'
 import './blogs.css'
 import Divider from './divider'
 
+const injection = data => {
+    let i = data.indexOf('\n');
+    const wordCount = s => {
+        s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
+        s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
+        s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
+        return s.split(' ').filter(function(str){return str!="";}).length;
+        //return s.split(' ').filter(String).length; - this can also be used
+    }
+    let wordNum = wordCount(data);
+    let readTime = Math.ceil(wordNum / 200);
+    let readInfo = readTime + ' min read';
+    let info = readInfo + '\n';
+    return data.slice(0,i) + info + data.slice(i+1, data.length);
+}
+
 const Blog = forwardRef((_, ref) => {
 
     const [data, setdata] = useState("");
@@ -32,7 +48,7 @@ const Blog = forwardRef((_, ref) => {
             console.log("fetch cps.md");
             await fetch(md)
                 .then(r => r.text())
-                .then(text => setdata(text));
+                .then(text => setdata(injection(text)));
             setIsLoading(false);
         }
         fetchData(md);
@@ -55,14 +71,17 @@ const Blog = forwardRef((_, ref) => {
                         <img src="image/loading.png" alt="ON LOADING..." />
                     </div>
                     : <>
-                        <Sidebar />
                         <div ref={ref} id="blog-container" className="blog-link">
-                            <ReactMarkdown
+                            <Markdown
                                 remarkPlugins={[gfm, remarkMath, remarkEmoji]}
                                 rehypePlugins={[rehypeKatex, rehypeRaw]}
                                 children={data}
                                 components={components}
                             />
+                        </div>
+                        <Sidebar />
+                        <div id="footer">
+
                         </div>
                     </>
             }
