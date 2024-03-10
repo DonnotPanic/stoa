@@ -5,8 +5,8 @@ import { throttle } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
-import { BlogContext } from '../../../App'
 import './toc.styl'
+import { observer } from 'mobx-react-lite'
 
 const RenderList = (props) => {
     const [prevLeaf, setPrevLeaf] = useState(null);
@@ -130,13 +130,12 @@ const deserList = (list) => {
 }
 
 
-export default function Toc() {
+const Toc = observer(({blogContainer}) => {
     const [contents, setContents] = useState([]);
     const [offsets, setOffsets] = useState([]);
     const [headOffset, setHeadOffset] = useState("");
     const [focus, setFocus] = useState("");
 
-    let blogContainer = useContext(BlogContext);
 
     const flatContents = useMemo(() => {
         const flatten = arr => arr.reduce((prev, cur) => {
@@ -148,15 +147,20 @@ export default function Toc() {
     }, [contents])
 
     useEffect(() => {
-        let tmp = [...blogContainer.current.children]
-            .filter(v => /H[2-6]/g.test(v.tagName));
-        let offsets = tmp.map(e => ({ val: e.innerText, offset: e.offsetTop }));
-        setOffsets(offsets);
-        setContents(deserList(tmp));
+        if (!blogContainer.isReady) return;
+        const offsets = JSON.parse(JSON.stringify(blogContainer.offsets));
+        if(blogContainer.isUpdated){
+            setOffsets(offsets);
+            blogContainer.update();
+        }
+        if(!contents.length) {
+            const tmp = blogContainer.titles;
+            setContents(deserList(tmp));
+        }
         let containerOffset = document.getElementById("blog-container").offsetTop;
         let headerHeight = document.getElementById("header").offsetHeight;
         setHeadOffset(containerOffset - headerHeight);
-    }, [blogContainer]);
+    }, [blogContainer.isUpdated]);
 
     const getFocus = useCallback(
         () => {
@@ -204,7 +208,7 @@ export default function Toc() {
         return (() => {
             window.removeEventListener('scroll', scrollCur)
         })
-    })
+    },[flatContents, getFocus])
 
     return (
         <div id="table-of-content">
@@ -213,4 +217,6 @@ export default function Toc() {
             }
         </div>
     )
-}
+});
+
+export default Toc;

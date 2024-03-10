@@ -25,8 +25,6 @@ export default function BlogList() {
         fetchData();
     },[]);
 
-    useEffect(()=>console.log(mdInfo),[mdInfo]);
-
     return (
         <div className="blog-list">
             <ul>

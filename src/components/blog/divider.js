@@ -1,19 +1,18 @@
+import { observer } from 'mobx-react-lite';
 import React, {
     useCallback, useLayoutEffect,
-    useEffect, useState, useContext
+    useEffect, useState
 } from 'react'
 
-import { BlogContext } from '../../App'
 
 
-export default function Divider({ node, ...props }) {
+ const Divider = observer(({ node, blogContainer, ...props }) => {
     const [className, setClassName] = useState("")
     const [isChanged, setIsChanged] = useState(false)
 
-    const blogContainer = useContext(BlogContext);
 
     const getClassName = useCallback(() => {
-        const containerWidth = blogContainer.current ? blogContainer.current.clientWidth : 0;
+        const containerWidth = blogContainer.isReady ? blogContainer.clientWidth : 0;
         if (containerWidth >= 960) {
             setClassName("large");
         } else if (containerWidth >= 810) {
@@ -42,4 +41,6 @@ export default function Divider({ node, ...props }) {
     return (
         <hr className={className} {...props} />
     )
-}
+});
+
+export default Divider;

@@ -1,7 +1,7 @@
 import React, {
     useState,
     useEffect,
-    forwardRef
+    useCallback
 } from 'react'
 import FslightBox from 'fslightbox-react';
 import Markdown from 'react-markdown'
@@ -24,17 +24,39 @@ import './blog.styl'
 
 import Divider from './divider'
 import metaProperty from './meta';
-import { makeAutoObservable } from 'mobx';
 import { useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
-const Blog = forwardRef((_, ref) => {
+const Blog = observer(({blogContainer}) => {
     const params = useParams();
     const [sources, setSources] = useState([]);
-    const lightboxState = makeAutoObservable({toggler:false, sourceIndex:0});
+    const [lightboxState, setLightboxState] = useState({toggler:false, sourceIndex:0});
     const [data, setData] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
+
+    
+    const ref = useCallback(node => {
+        const getTitles = node => {
+            const t = [...node.children].filter(v => /H[2-6]/g.test(v.tagName));
+            return t;
+        }
+        const getOffsets = node => {
+            const t = (getTitles(node).map(e => ({ val: e.innerText, offset: e.offsetTop })));
+            return t;
+        }
+        if(node === null) return;
+        blogContainer.init(node.clientHeight,node.scrollTop,
+            node.offsetTop, getTitles(node), getOffsets(node),
+            true,node.clientWidth, node.children[0]);
+        const resizeObserver = new ResizeObserver(() => {
+            blogContainer.resize(getOffsets(node), node.clientWidth);
+        });
+        resizeObserver.observe(node);
+    },[blogContainer]);
+
     useEffect(() => {
+        if(!params.blogid) return;
         async function fetchData() {
             console.log(`fetch ${decode64(decodeURI(params.blogid))}.md`);
 
@@ -44,21 +66,16 @@ const Blog = forwardRef((_, ref) => {
             setIsLoading(false);
         }
         fetchData();
-    }, []);
-
-    useEffect(() => {
-
-    },[])
+    }, [params.blogid]);
 
     const hanldeSlide = index => {
-        lightboxState.toggler = !lightboxState.toggler;
-        lightboxState.sourceIndex = index;
+        setLightboxState(el => ({toggler: !el.toggler, sourceIndex:index}));
     }
 
     const components = {
         a: StyleLink,
         code: CodeBlock,
-        hr: Divider,
+        hr: ({...args}) => {return (<Divider blogContainer={blogContainer} {...args}/>)},
         input: WiredStyleCheckbox,
         img: ({src, ...args}) => {
             return(<WiredStyleImage src={src} sources={sources} setSources={setSources} setSlide={hanldeSlide} {...args}/>);
@@ -86,7 +103,7 @@ const Blog = forwardRef((_, ref) => {
                                 components={components}
                             />
                         </div>
-                        <Sidebar />
+                        <Sidebar blogContainer={blogContainer}/>
                         <div id="footer">
 
                         </div>
@@ -94,6 +111,6 @@ const Blog = forwardRef((_, ref) => {
             }
         </>
     )
-})
+});
 
 export default Blog;

@@ -2,14 +2,16 @@ import React from 'react'
 
 import Toc from './toc'
 import './sidebar.styl'
+import { observer } from 'mobx-react-lite'
 
-export default function Sidebar() {
-
+const Sidebar = observer(({blogContainer}) => {
 
     return (
         <div className="sidebar">
             <span className='content'>CONTENT</span>
-            <Toc />
+            <Toc blogContainer={blogContainer}/>
         </div>
     )
-}
+});
+
+export default Sidebar;
