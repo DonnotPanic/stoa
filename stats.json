@@ -1,0 +1,12 @@
+{
+  "assetsByChunkName": {
+    "main": [
+      "main.css",
+      "js/main.c92801ee.bundle.js"
+    ],
+    "vendors": [
+      "vendors.css",
+      "js/vendors.557114a9.bundle.js"
+    ]
+  }
+}
