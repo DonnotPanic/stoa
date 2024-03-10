@@ -8,10 +8,11 @@ export default function BlogList() {
 
     const parseCSV = data => {
         const res = [];
-        const items = data.split('\r');
+        const items = data.split('\n');
         items.forEach(el => {
-            const elements = el.trim().split(',');
+            const elements = el.replace('\r','').trim().split(',');
             res.push({name:elements[0],date:elements[1],path:elements[2]});
+            console.log(res);
         });
         return res;
     };
