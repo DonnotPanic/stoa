@@ -12,7 +12,7 @@ export default function BlogList() {
         items.forEach(el => {
             const elements = el.replace('\r','').trim().split(',');
             res.push({name:elements[0],date:elements[1],path:elements[2]});
-            console.log(res);
+            console.log("res", res);
         });
         return res;
     };

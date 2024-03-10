@@ -35,7 +35,7 @@
     "watch": "webpack --watch --config webpack.dev.js",
     "serve": "webpack serve --open --config webpack.dev.js",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --branch gh-pages --dotfiles"
   },
   "eslintConfig": {
     "extends": [
