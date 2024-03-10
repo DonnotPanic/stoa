@@ -1,9 +1,9 @@
-<!-- +++
++++
 date = "2020-04-01"
 title = "CPS Tutorial For Kindergarteners"
 katex = "true"
 series = ["Haskell","paradigm","programming"]
-+++ -->
++++
 
 # CPS Tutorial For Kindergarteners
 

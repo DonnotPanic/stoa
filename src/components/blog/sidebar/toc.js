@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 import { BlogContext } from '../../../App'
-import './toc.css'
+import './toc.styl'
 
 const RenderList = (props) => {
     const [prevLeaf, setPrevLeaf] = useState(null);
@@ -102,24 +102,26 @@ const deserList = (list) => {
     if (!list.length) return null;
     let stack = [];
     let ans = [];
-    let top;
+    let cur;
     for (let v of list) {
-        if (!top) {
-            top = new ContentItem(v);
+        if (!cur) {
+            cur = new ContentItem(v);
+            if (!stack.length) stack.push(cur);
         } else {
-            while (stack.length && top.tagName >= v.tagName)
-                top = stack.pop();
-            if (top.tagName < v.tagName) {
+            while (stack.length && cur.tagName >= v.tagName)
+                cur = stack.pop();
+            if (cur.tagName < v.tagName) {
                 let tmp = new ContentItem(v);
-                if (!top.children)
-                    top.children = [];
-                tmp.parent = top;
-                top.children.push(tmp);
-                stack.push(top);
-                top = tmp;
+                if (!cur.children)
+                    cur.children = [];
+                tmp.parent = cur;
+                cur.children.push(tmp);
+                stack.push(cur);
+                cur = tmp;
             } else {
-                ans.push(top);
-                top = new ContentItem(v);
+                ans.push(cur);
+                cur = new ContentItem(v);
+                if (!stack.length) stack.push(cur);
             }
         }
     }

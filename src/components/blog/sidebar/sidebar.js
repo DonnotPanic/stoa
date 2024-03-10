@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 
 import Toc from './toc'
-import './sidebar.css'
+import './sidebar.styl'
 
 export default function Sidebar() {
 

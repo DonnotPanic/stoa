@@ -1,6 +1,6 @@
 import React from 'react'
 import { WiredCheckBox } from 'react-wired-elements'
-import './wired_checkbox.css'
+import './wired_checkbox.styl'
 
 export default function WiredStyleCheckbox({node, ...props}) {
 

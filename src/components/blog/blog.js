@@ -11,6 +11,7 @@ import remarkEmoji from 'remark-emoji'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
 import 'katex/dist/katex.min.css'
+import { decode64 } from '../../utils/base64';
 
 import CodeBlock from './code-block'
 import Sidebar from './sidebar/sidebar'
@@ -18,51 +19,40 @@ import StyleLink from './stylelink'
 import WiredStyleCheckbox from './vendor/wired_checkbox'
 import WiredStyleImage from './vendor/wired_image'
 import StyleVideo from './vendor/react_video'
-import md from '../../markdowns/tests/reference.md'
-import './divider.css'
-import './blogs.css'
-import Divider from './divider'
+import './divider.styl'
+import './blog.styl'
 
-const injection = data => {
-    let i = data.indexOf('\n');
-    const wordCount = s => {
-        s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
-        s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
-        s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
-        return s.split(' ').filter(function(str){return str !== "";}).length;
-        //return s.split(' ').filter(String).length; - this can also be used
-    }
-    let wordNum = wordCount(data);
-    let readTime = Math.ceil(wordNum / 200);
-    let readInfo = readTime + ' min read';
-    let info = readInfo + '\n';
-    return data.slice(0,i) + info + data.slice(i+1, data.length);
-}
+import Divider from './divider'
+import metaProperty from './meta';
+import { makeAutoObservable } from 'mobx';
+import { useParams } from 'react-router-dom';
 
 const Blog = forwardRef((_, ref) => {
-    const buff = [];
+    const params = useParams();
     const [sources, setSources] = useState([]);
-    const [lightboxState, setLightboxState] = useState({toggler:false, sourceIndex:0});
+    const lightboxState = makeAutoObservable({toggler:false, sourceIndex:0});
     const [data, setData] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData(md) {
-            console.log("fetch ref.md");
+        async function fetchData() {
+            console.log(`fetch ${decode64(decodeURI(params.blogid))}.md`);
 
-            await fetch(md)
+            await fetch(`/markdowns${decode64(decodeURI(params.blogid))}.md`)
                 .then(r => r.text())
-                .then(text => setData(injection(text)));
+                .then(text => setData(metaProperty(text)));
             setIsLoading(false);
         }
-        fetchData(md);
+        fetchData();
     }, []);
 
+    useEffect(() => {
+
+    },[])
+
     const hanldeSlide = index => {
-        setLightboxState({
-            toggler: !lightboxState.toggler,
-            sourceIndex: index
-        });
+        lightboxState.toggler = !lightboxState.toggler;
+        lightboxState.sourceIndex = index;
     }
 
     const components = {
@@ -81,7 +71,7 @@ const Blog = forwardRef((_, ref) => {
             {
                 isLoading
                     ? <div className="on-loading">
-                        <img src="image/loading.png" alt="ON LOADING..." />
+                        <img src="/image/loading.png" alt="ON LOADING..." />
                     </div>
                     : <>
                         <div className='zooming-wrapper'>

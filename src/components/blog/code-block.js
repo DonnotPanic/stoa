@@ -4,7 +4,7 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboard, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
-import './code-block.css'
+import './code-block.styl'
 
 export default function CodeBlock({ node, inline, className, children, ...args }) {
     const value = String(children).replace(/\n$/, '');

@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useMemo, useState } from 'react'
 import ReactPlayer from 'react-player'
-import './react_video.css'
+import './react_video.styl'
 
 export default function StyleVideo({ node, src, type, children, ...props }) {
     const [url, setUrl] = useState([]);

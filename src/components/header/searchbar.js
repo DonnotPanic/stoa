@@ -4,7 +4,7 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { action, computed } from 'mobx'
 import { useLocalObservable, observer } from 'mobx-react-lite';
 
-import './searchbar.css'
+import './searchbar.styl'
 
 const Searchbar = observer(() => {
 

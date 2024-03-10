@@ -1,9 +1,9 @@
-<!-- +++
++++
 date = "2021-03-26"
 title = "Subtyping：从 Lens 到 Row Polymorphism"
 katex = true
 series = ["OCaml","Haskell", "Row Poly", "programming"]
-+++ -->
++++
 
 # Subtyping：从 Lens 到 Row Polymorphism
 
@@ -161,5 +161,3 @@ instance Describable ItemWithDesc where ...
 <center><img src="http://oleg.fi/gists/images/optics-hierarchy.svg" alt="Lens结构" /></center>
 
 直白的说 Lens 不过是对上述 getter、 setter 的花哨包装罢了。Lens 的核心组件包括Fold、Setter、Getter、Traversal、Lens、Review、Prism。看起来很复杂，不过实际使用却非常直观简洁。
-
-对于上述 data 来说，如果

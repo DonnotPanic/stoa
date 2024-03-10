@@ -8,14 +8,14 @@ series = ["combinatorics","algorithm","programming","C++"]
 
 >注，本文章是18年的旧文，是我刚学C++时所写。
 
-### 前置: 快速幂取模
+## 前置: 快速幂取模
 
 
 快速计算$\ a^b (mod\ m)$
 **原理:**  取模运算的结合率 $x*y(mod\ m)\ =\ x(mod\ m)*y(mod\ m )$
 
-**快速算法:** b为偶数时，可将$a^b$拆分成$a^\frac{b}2*a^\frac{b}2$分别取模，将复杂度降低为$O(\log_{2}N)
-$
+**快速算法:** b为偶数时，可将$a^b$拆分成$a^\frac{b}2*a^\frac{b}2$分别取模，将复杂度降低为$O(\log_{2}N)$
+
 
 **代码(C++):**
 
@@ -41,11 +41,11 @@ int quick_mod (int a, int b, int m) {
 我们都知道朴素卷积算法：
 
 $$
-c_n = \sum\_{i=0}^{n} a\_ib\_{n-i}
+c_n = \sum_{i=0}^{n} a_ib_{n-i}
 $$
 
 $$
-C(x) = \sum_{j=0}^{2n-2} c\_jx^j
+C(x) = \sum_{j=0}^{2n-2} c_jx^j
 $$
 复杂度O($N^2$), 应对超大数乘法时明显太慢。有没有什么办法提高计算速度呢？
 
@@ -70,7 +70,7 @@ x^0&x^1&\cdots&x^{n-1}
 \end{matrix}
 \right]
 \left[\begin{matrix}
-a_0&a\_1&\cdots&{a\_{n-1}}
+a_0&a_1&\cdots&{a_{n-1}}
 \end{matrix}\right]^T
 $$
 
@@ -107,7 +107,7 @@ $$
 对于多项式$A(x)=\sum_{i=0}^{n-1}a_ix^i$可以按奇偶拆分成
 
 $$
-A(x)=\sum_{i=0}^{\frac{n}{2}-1}a\_{2i} x^{2i} +x\sum\_{i=0}^{\frac{n}{2}-1}a\_{2i+1}x^{2i}
+A(x)=\sum_{i=0}^{\frac{n}{2}-1}a_{2i} x^{2i} +x\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}x^{2i}
 $$
 
 到目前为止平平无奇，因为我们还没找到合适的x。是时候让问题变得$\mathbb C$omplex了。= u =
@@ -146,25 +146,25 @@ $$
 我们不妨另n为2的方幂（如果不够就往高位补0），前面提到：
 
 $$
-A_1(x)=\sum\_{i=0}^{\frac{n}{2}-1}a\_{2i}x^{2i}+x\sum\_{i=0}^{\frac{n}{2}-1}a\_{2i+1}x^{2i}
+A_1(x)=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}x^{2i}+x\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}x^{2i}
 $$
 
 让我们把$\omega_n^k$代入试试？
 
 $$
-A(\omega_n^k)=\sum\_{i=0}^{\frac{n}{2}-1}a\_{2i}\omega\_n^{2ki}+\omega\_n^k\sum\_{i=0}^{\frac{n}{2}-1}a\_{2i+1}\omega_n^{2ki}
+A(\omega _n^k)=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}\omega _n^{2ki}+\omega _n^k\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega_n^{2ki}
 $$
 
 分别令$A_0$和$A_1$代表偶数项系数和奇数项系数，由上述第2条折半性，整理一下，得到:
 
 $$
-A(\omega_n^k)=A\_0(\omega\_{\frac{n}{2}}^{ki})+\omega\_n^kA\_1(\omega\_{\frac{n}{2}}^{ki})
+A(\omega _n^k)=A_0(\omega _{\frac{n}{2}}^{ki})+\omega _n^kA_1(\omega _{\frac{n}{2}}^{ki})
 $$
 
 利用一下性质1
 
 $$
-A(\omega_n^{k+\frac{n}{2}})=A\_0(\omega\_{\frac{n}{2}}^{ki})-\omega\_n^kA\_1(\omega\_{\frac{n}{2}}^{ki})
+A(\omega_n^{k+\frac{n}{2}})=A_0(\omega _{\frac{n}{2}}^{ki})-\omega _n^kA_1(\omega _{\frac{n}{2}}^{ki})
 $$
 
 差不多的计算量，一次得到两个值，酷不酷o_o？（这个操作又被称作蝶形计算）
@@ -286,11 +286,11 @@ In modular arithmetic , a branch of number theory, a number *g* is a **primitive
 显然$g^{k_1+1}(mod\ n)=(g(mod\ n)*g^{k_1}(mod\ n))(mod\ n)=(g(mod\ n)*m)(mod\ n)$
 
 $$
-g^{k_{2}+1} (mod\ n) = (g (mod\ n) * g ^ {k\_{2}} (mod\ n)) (mod\ n) = (g(mod\ n) * m) (mod\ n)
+g^{k_{2}+1} (mod\ n) = (g (mod\ n) * g ^ {k_{2}} (mod\ n)) (mod\ n) = (g(mod\ n) * m) (mod\ n)
 $$
 
 $$
-g^{k\_{1}+1}\equiv g^{k\_2+1} (mod\ n)
+g^{k_{1}+1}\equiv g^{k_2+1} (mod\ n)
 $$
 
 显然对于$k_2$后的任意k都必然与前面某个$g^{k_i}$同余,$g^k(mod\ n)$不能遍历1～(n-1),与g是n的原根矛盾。
@@ -386,7 +386,7 @@ $$
 这不是浮点数，而是整数，整数取模状态下的除法运算咋做啊？（百度，费马小定理，默认大家都会了）: )
 
 
-$$
+
 接下来应该解决$g^{-\frac{(P-1)k}{l}}$这个问题啦
 
 我们在前面已经证明了$g^{P-1}(mod \ P) = 1$

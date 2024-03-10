@@ -1,10 +1,17 @@
 .intro-container {
     display: inline-block;
     margin-top: 5vh;
-    padding-left: 4vw;
-    padding-right: 4vw;
+    padding-left: 3rem;
+    padding-right: 3rem;
     font-family: "JetBrains Mono", monospace;
     text-align: left;
+}
+
+@media screen and (min-width: 60rem) {
+    .intro-container {
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
 }
 
 .intro-container > h1 {

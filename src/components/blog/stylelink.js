@@ -1,5 +1,5 @@
 import React from 'react'
-import './stylelink.css'
+import './stylelink.styl'
 
 export default function StyleLink({ href, title, children }) {
     return (
