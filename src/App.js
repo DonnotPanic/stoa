@@ -1,31 +1,38 @@
-import React from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import './App.styl';
-import Blog from './components/blog/blog'
-import Home from './components/home/home'
-import Header from './components/header/header'
-import BlogList from './components/blogList/blogList';
-import { makeAutoObservable } from 'mobx';
+import "./App.styl";
+import Blog from "./components/blog/blog";
+import Home from "./components/home/home";
+import Header from "./components/header/header";
+import BlogList from "./components/blogList/blogList";
+import { makeAutoObservable } from "mobx";
 
 class BlogContainer {
-  clientHeight= 0;
-  scrollTop= 0;
-  offsetTop= 0;
+  clientHeight = 0;
+  scrollTop = 0;
+  offsetTop = 0;
   titles = [];
   offsets = [];
-  isReady= false;
-  clientWidth=0;
-  head={};
-  isUpdated=false;
-  
-  constructor() {makeAutoObservable(this);}
+  isReady = false;
+  clientWidth = 0;
+  head = {};
+  isUpdated = false;
 
-  init(clientHeight, scrollTop, offsetTop,titles, offsets, isReady,clientWidth, head){
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  init(
+    clientHeight,
+    scrollTop,
+    offsetTop,
+    titles,
+    offsets,
+    isReady,
+    clientWidth,
+    head,
+  ) {
     this.clientHeight = clientHeight;
     this.scrollTop = scrollTop;
     this.offsetTop = offsetTop;
@@ -37,13 +44,13 @@ class BlogContainer {
     this.isUpdated = true;
   }
 
-  resize(offsets, clientWidth){
+  resize(offsets, clientWidth) {
     this.offsets = offsets;
     this.clientWidth = clientWidth;
     this.isUpdated = true;
   }
 
-  update(){
+  update() {
     this.isUpdated = false;
   }
 }
@@ -51,16 +58,18 @@ class BlogContainer {
 const blogContainer = new BlogContainer();
 
 function App() {
-
   return (
     <BrowserRouter>
-      <Header blogContainer={blogContainer}/>
+      <Header blogContainer={blogContainer} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/blog/:blogid" element={<Blog blogContainer={blogContainer} />} />
+        <Route
+          path="/blog/:blogid"
+          element={<Blog blogContainer={blogContainer} />}
+        />
         <Route path="/blogs" element={<BlogList />} />
       </Routes>
-    </ BrowserRouter>
+    </BrowserRouter>
   );
 }
 

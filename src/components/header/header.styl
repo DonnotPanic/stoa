@@ -1,83 +1,53 @@
-.toggler {
-    display: inherit;
-    height: 2rem;
-    width: 2rem;
-    background-color: tan;
-    padding-right: 6vw;
-}
+.toggler
+  display inherit
+  height 2rem
+  width 2rem
+  background-color tan
+  padding-right 6vw
 
-.nav-bar {
-    display: none;
-    height: 2rem;
-    width: 20rem;
-    top: 0;
-    background-color: yellow;
-    padding-right: 5vw;
-    right: 0;
-}
+#header
+  top 0%
+  display flex
+  position sticky
+  flex-direction row-reverse
+  justify-content right
+  align-items center
+  height 6rem
+  background-color white
+  z-index 1000
+  box-shadow none
+  transition box-shadow 0.1s ease-in-out
 
-#header {
-    top: 0%;
-    display: flex;
-    position: sticky;
-    flex-direction: row-reverse;
-    justify-content: right;
-    align-items: center;
-    height: 6rem;
-    background-color: white;
-    z-index: 1000;
-    box-shadow: none;
-    transition: box-shadow 0.1s ease-in-out;
-}
+:target
+  scroll-margin-top 6rem
 
-:target {
-    scroll-margin-top: 6rem;
-}
+#header.scrolling-header
+  box-shadow 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075) !important
 
-#header.scrolling-header {
-    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .075)!important;
-}
-
-.padding {
-    display: none;
-}
+.padding
+  display none
 
 /* 电脑端以及 iPad 端 */
 
-@media screen and (min-width: 40rem) {
-    .toggler {
-        display: none;
-    }
-    .nav-bar {
-        display: inherit;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #header {
-        height: 4rem;
-    }
-    .scrolling-header {
-        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
-    }
-    .padding {
-        display: inherit;
-        display: flex;
-        height: 2rem;
-    }
-    .searchbar {
-        font-size: 1rem !important;
-    }
-    :target {
-        scroll-margin-top: 4rem;
-    }
-}
+@media screen and (min-width: 40rem)
+  .toggler
+    display none
+  #header
+    height 4rem
+  .scrolling-header
+    box-shadow 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important
+  .padding
+    display inherit
+    display flex
+    height 2rem
+  .searchbar
+    font-size 1rem !important
+  :target
+    scroll-margin-top 4rem
 
 /* TODO */
 
-#header>center {
-    width: 100%;
-    transform-style: preserve-3d;
-    perspective: 1000;
-}
+#header>center
+  width 100%
+  transform-style preserve-3d
+  perspective 1000

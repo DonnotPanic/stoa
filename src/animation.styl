@@ -1,37 +1,27 @@
-@keyframes loading {
-    0% {
-        transform: rotate(1turn);
-    }
-    50% {
-        transform: rotate(0.5turn);
-    }
-}
+@keyframes loading
+  0%
+    transform rotate(1turn)
+  50%
+    transform rotate(0.5turn)
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+@keyframes fadeIn
+  0%
+    opacity 0
+  100%
+    opacity 1
 
-.on-loading {
-    position: absolute;
-    top: calc(50% - 5vh);
-    left: calc(50% - 5vh);
-    max-height: 10vh;
-    max-width: 10vh;
-    transform-origin: center;
-    animation: loading 2s linear infinite;
-    animation-direction: reverse;
-}
+.on-loading
+  position absolute
+  top calc(50% - 5vh)
+  left calc(50% - 5vh)
+  max-height 10vh
+  max-width 10vh
+  transform-origin center
+  animation loading 2s linear infinite
+  animation-direction reverse
 
-@keyframes fadeOutBackground {
-    from {
-        background-color: tan;
-    }
-    to {
-        background-color: transparent;
-    }
-}
+@keyframes fadeOutBackground
+  from
+    background-color tan
+  to
+    background-color transparent
