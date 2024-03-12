@@ -50,8 +50,9 @@ const Header = observer(({ blogContainer }) => {
       if (!blogContainer.isReady) return;
       const top = e.target.documentElement.scrollTop;
       let query = blogContainer.head;
-      if (top < query.offsetTop + query.clientHeight) {
+      if (top < query.offsetTop + query.clientHeight + 200) {
         setIsDown(true);
+        return;
       }
       if (Math.abs(prevTop - top) < 100) return;
       if (prevTop < top) {

@@ -13,6 +13,10 @@ const RenderList = (props) => {
   const collapsed = Boolean(props.collapsed);
   const innerList = Boolean(props.innerList);
 
+  const preventSmallScroll = (event, b) => {
+    if (b) event.stopPropagation();
+  }
+
   const handleFold = (e) => () => {
     const collapsePropa = (e, val = true) => {
       while (e) {
@@ -31,9 +35,9 @@ const RenderList = (props) => {
   };
 
   const scrollWidthOffset = (el) => {
-    const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
     const yOffset = -document.getElementById("header").clientHeight;
-    window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
+    el.scrollIntoView();
+    window.scrollBy({top:yOffset});
     throttle(() => {
       el.classList.add("title-on-focus");
       setTimeout(() => {
@@ -49,7 +53,7 @@ const RenderList = (props) => {
           key={props.prefix + String(i)}
           className={e.focused ? "focused" : ""}
         >
-          <List.Content>
+          <List.Content onClick={(event,_) => preventSmallScroll(event, e.focused)}>
             <Link
               smooth
               to={"#" + e.innerText}
@@ -145,6 +149,18 @@ const Toc = observer(({ blogContainer }) => {
   const [offsets, setOffsets] = useState([]);
   const [headOffset, setHeadOffset] = useState("");
   const [focus, setFocus] = useState("");
+  const [forbidden, setForbidden] = useState(false);
+
+  // refresh the TOC
+  const smallScroll = () => {
+    if(!forbidden)
+      setTimeout(() => {
+        window.scrollBy({top:-1, behavior:"smooth"});
+        console.log("smallSCroll");
+      }, 200);
+    setForbidden(true);
+    setTimeout(()=>setForbidden(false), 1500);
+  }
 
   const flatContents = useMemo(() => {
     const flatten = (arr) =>
@@ -222,7 +238,7 @@ const Toc = observer(({ blogContainer }) => {
   }, [flatContents, getFocus]);
 
   return (
-    <div id="table-of-content">
+    <div onClick={smallScroll} className={forbidden ? "forbidden" : ""} id="table-of-content">
       {<RenderList list={contents} focus={focus} />}
     </div>
   );
