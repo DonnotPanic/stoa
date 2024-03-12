@@ -1,10 +1,9 @@
 +++
 date = "2018-09-23"
-title ="五分钟学会快速数论变换"
-katex = "true"
 series = ["combinatorics","algorithm","programming","C++"]
 +++
 
+# 五分钟学会快速数论变换
 
 >注，本文章是18年的旧文，是我刚学C++时所写。
 

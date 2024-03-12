@@ -1,7 +1,5 @@
 +++
 date = "2021-03-26"
-title = "Subtyping：从 Lens 到 Row Polymorphism"
-katex = true
 series = ["OCaml","Haskell", "Row Poly", "programming"]
 +++
 

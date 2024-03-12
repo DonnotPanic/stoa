@@ -1,9 +1,9 @@
 +++
 date = "2021-01-19"
-title =  "Head First Lexical Analysis(1)"
-katex = true
 series = ["lexer"]
 +++
+
+# Head First Lexical Analysis(1)
 
 In general, lexical analysis is the process that transform the input source program to token stream, which later will be used by parser to produce syntax tree.
 

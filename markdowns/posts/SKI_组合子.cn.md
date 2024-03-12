@@ -1,6 +1,5 @@
 +++
 date = "2020-06-07"
-katex = true
 series = ["Haskell","paradigm"]
 +++
 

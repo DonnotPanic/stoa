@@ -1,10 +1,9 @@
 +++
 date = "2020-06-12"
-title = "Haskell中的几个基础的Typeclass"
-katex = "true"
 series = ["Haskell","programming"]
 +++
 
+# Haskell中的几个基础的Typeclass
 
 讲一些简单的东西，安利更多人打破内心的恐惧入坑 Haskell > w <
 
