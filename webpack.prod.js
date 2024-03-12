@@ -29,11 +29,26 @@ module.exports = merge(common, {
     optimization:{
         splitChunks: {
             cacheGroups: {
-                commons: {
+                react: {
+                    name: "react-related",
+                    test: /react/,
+                    priority: 2,
+                    chunks: 'all',
+                    reuseExistingChunk: true,
+                },
+                vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     chunks: 'all',
+                    priority: -10,
+                    reuseExistingChunk: true,
                 },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    chunks: 'all',
+                    reuseExistingChunk: true,
+                }
             },
         }
     }

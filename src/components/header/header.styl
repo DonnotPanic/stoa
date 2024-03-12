@@ -27,6 +27,18 @@
 .padding
   display none
 
+#header>center
+  padding-top: .4em
+  font-family 'KaTeX_Main', serif
+  font-size x-large
+  font-weight bold
+  width 100%
+
+#header>center::before
+  content open-quote
+#header>center::after
+  content close-quote
+
 /* 电脑端以及 iPad 端 */
 
 @media screen and (min-width: 40rem)
@@ -44,10 +56,6 @@
     font-size 1rem !important
   :target
     scroll-margin-top 4rem
-
-/* TODO */
-
-#header>center
-  width 100%
-  transform-style preserve-3d
-  perspective 1000
+  #header>center
+    padding-top: 0
+    font-size large
