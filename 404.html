@@ -6,7 +6,7 @@
     // If you're creating a Project Pages site and NOT using a custom domain, then set segCt to 1 (enterprise users may need to set it to > 1).
     // This way the code will only replace the route part of the path, and not the real directory in which the app resides, for example:
     // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes https://username.github.io/repo-name/?p=/one/two&q=a=b~and~c=d#qwe Otherwise, leave segCt as 0.
-    var segCt=1;var l = window.location; //switch(l.hash) {case '#local':segCt = 1;  break;  default: segCt = 0;break;} //todo2add
+    var segCt=0;var l = window.location; //switch(l.hash) {case '#local':segCt = 1;  break;  default: segCt = 0;break;} //todo2add
     // if (location.hostname === "localhost") {segCt = 1;}
     l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 1 + segCt).join('/') + '/?p=/' +
       l.pathname.slice(1).split('/').slice(segCt).join('/').replace(/&/g, '~and~') + (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') + l.hash);
