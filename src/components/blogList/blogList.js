@@ -32,7 +32,7 @@ export default function BlogList() {
           return (
             <li key={el.name}>
               <Link
-                to={"/blog/" + encodeURI(encode64(el.path + "/" + el.name))}
+                to={"/blog/" + encode64(encodeURI(el.path + "/" + el.name))}
               >
                 {el.name} : {el.date}
               </Link>

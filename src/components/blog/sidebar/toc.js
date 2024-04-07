@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { HashLink as Link } from "react-router-hash-link";
-import { List } from "semantic-ui-react";
+import { List } from 'https://cdn.jsdelivr.net/npm/semantic-ui-react@2.1.5/+esm';
 import throttle from "lodash/throttle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons/faEllipsisH";
 
 import "./toc.styl";
 import { observer } from "mobx-react-lite";

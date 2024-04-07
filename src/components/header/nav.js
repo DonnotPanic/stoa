@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { faHouse, faBlog } from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
+import { faBlog } from "@fortawesome/free-solid-svg-icons/faBlog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./nav.styl";
 

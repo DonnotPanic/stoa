@@ -1,12 +1,20 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.styl";
-import Blog from "./components/blog/blog";
-import Home from "./components/home/home";
 import Header from "./components/header/header";
-import BlogList from "./components/blogList/blogList";
 import { makeAutoObservable } from "mobx";
+
+const Home = lazy(() => import("./components/home/home"));
+const Blog = lazy(() => import("./components/blog/blog"));
+const BlogList = lazy(() => import("./components/blogList/blogList"));
+
+const Loading = () => {
+  return(
+    <div className="on-loading">
+      <img src="/image/loading.png" alt="ON LOADING..." />
+    </div>);
+}
 
 class BlogContainer {
   clientHeight = 0;
@@ -62,12 +70,23 @@ function App() {
     <BrowserRouter>
       <Header blogContainer={blogContainer} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+            <Suspense fallback={<Loading />}>
+              <Home />
+            </Suspense>} />
         <Route
           path="/blog/:blogid"
-          element={<Blog blogContainer={blogContainer} />}
+          element={
+            <Suspense fallback={<Loading />}>
+              <Blog blogContainer={blogContainer} />
+            </Suspense>}
         />
-        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/blogs"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BlogList />
+            </Suspense>}
+        />
       </Routes>
     </BrowserRouter>
   );

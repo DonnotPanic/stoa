@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo, useState } from "react";
-import ReactPlayer from "react-player";
+import ReactPlayer from 'react-player';
 import "./react_video.styl";
 
 export default function StyleVideo({ node, src, type, children, ...props }) {

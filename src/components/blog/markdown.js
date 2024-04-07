@@ -1,10 +1,10 @@
-import React, { useCallback } from "react";
-import Markdown from "react-markdown";
-import gfm from "remark-gfm";
-import remarkMath from "remark-math";
-import remarkEmoji from "remark-emoji";
-import rehypeKatex from "rehype-katex";
-import rehypeRaw from "rehype-raw";
+import React from "react";
+import Markdown from 'https://cdn.jsdelivr.net/npm/react-markdown@9.0.1/+esm';
+import gfm from 'https://cdn.jsdelivr.net/npm/remark-gfm@4.0.0/+esm';
+import remarkMath from 'https://cdn.jsdelivr.net/npm/remark-math@6.0.0/+esm';
+import remarkEmoji from 'https://cdn.jsdelivr.net/npm/remark-emoji@4.0.1/+esm';
+import rehypeKatex from "https://esm.sh/rehype-katex@7";
+import rehypeRaw from "https://esm.sh/rehype-raw@7?bundle";
 
 import CodeBlock from "./code-block";
 import StyleLink from "./stylelink";
@@ -17,42 +17,7 @@ import { observer } from "mobx-react-lite";
 import "./divider.styl";
 import "./markdown.styl";
 
-
-
-
-const MarkdownContainer = observer(({data, blogContainer,sources, setSources, handleSlide, ...args}) => {
-
-    const ref = useCallback(
-        (node) => {
-          const getTitles = (node) => {
-            const t = [...node.children].filter((v) => /H[2-6]/g.test(v.tagName));
-            return t;
-          };
-          const getOffsets = (node) => {
-            const t = getTitles(node).map((e) => ({
-              val: e.innerText,
-              offset: e.offsetTop,
-            }));
-            return t;
-          };
-          if (node === null) return;
-          blogContainer.init(
-            node.clientHeight,
-            node.scrollTop,
-            node.offsetTop,
-            getTitles(node),
-            getOffsets(node),
-            true,
-            node.clientWidth,
-            node.children[0],
-          );
-          const resizeObserver = new ResizeObserver(() => {
-            blogContainer.resize(getOffsets(node), node.clientWidth);
-          });
-          resizeObserver.observe(node);
-        },
-        [blogContainer],
-      );
+const MarkdownContainer = observer(({data, blogContainer,sources, setSources, handleSlide}) => {
 
     const components = {
         a: StyleLink,
@@ -76,14 +41,12 @@ const MarkdownContainer = observer(({data, blogContainer,sources, setSources, ha
       };
 
     return (
-        <div ref={ref} id="blog-container" className="blog-link">
-            <Markdown
-                remarkPlugins={[gfm, remarkMath, remarkEmoji]}
-                rehypePlugins={[rehypeKatex, rehypeRaw]}
-                children={data}
-                components={components}
-                />
-        </div>
+      <Markdown
+          remarkPlugins={[gfm, remarkMath, remarkEmoji]}
+          rehypePlugins={[rehypeKatex, rehypeRaw]}
+          children={data}
+          components={components}
+          />
     );
 });
 

@@ -21,7 +21,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
-
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
@@ -29,7 +28,12 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
+                loader: 'esbuild-loader',
+                options: {
+                    loader: 'jsx',
+                    target: 'es2018',
+                    jsx: 'automatic',
+                },
                 exclude: /node_modules/,
             },
             {

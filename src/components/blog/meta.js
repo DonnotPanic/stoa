@@ -19,7 +19,7 @@ const wordWrapper = (data) => {
   let wordNum = wordCount(data);
   let readTime = Math.ceil(wordNum / 250);
   let readInfo = readTime + " min read";
-  return `<span id='read-info'> ${readInfo} </span>`;
+  return `\n<p><span id='read-info'> ${readInfo} </span></p>\n`;
 };
 
 export default function metaProperty(data) {

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Markdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
+import React, { useState, useEffect, lazy } from "react";
 import "./home.styl";
+
+const Markdown = lazy(()=>import('https://cdn.jsdelivr.net/npm/react-markdown@9.0.1/+esm'));
 
 function Home() {
   const [data, setdata] = useState("");
@@ -26,7 +26,7 @@ function Home() {
         </div>
       ) : (
         <div className="intro-container">
-          <Markdown children={data} rehypePlugins={[rehypeRaw]} />
+          <Markdown children={data} />
         </div>
       )}
     </>

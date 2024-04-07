@@ -1,14 +1,13 @@
-import React, { useState, useEffect, lazy } from "react";
-import FslightBox from "fslightbox-react";
-import "katex/dist/katex.min.css";
-import { decode64 } from "../../utils/base64";
+import React, { useState, useEffect, lazy, useCallback } from "react";
 
-import Sidebar from "./sidebar/sidebar";
+import { decode64 } from "../../utils/base64";
 
 import metaProperty from "./meta";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
+const FslightBox = lazy(() => import('fslightbox-react'));
+const Sidebar = lazy(() => import("./sidebar/sidebar"))
 const MarkdownContainer = lazy(() => import("./markdown"));
 
 const Blog = observer(({ blogContainer }) => {
@@ -21,11 +20,46 @@ const Blog = observer(({ blogContainer }) => {
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  const ref = useCallback(
+    (node) => {
+      const getTitles = (node) => {
+        const t = [...node.children].filter((v) => /H[2-6]/g.test(v.tagName));
+        return t;
+      };
+      const getOffsets = (node) => {
+        const t = getTitles(node).map((e) => ({
+          val: e.innerText,
+          offset: e.offsetTop,
+        }));
+        return t;
+      };
+      if (node === null) return;
+      // if H1 does not exists then pick the fst sentense.
+      let q = [...node.children].filter((v) => /H1/g.test(v.tagName));
+      q = (q.length === 0) ? node.children : q;
+      blogContainer.init(
+        node.clientHeight,
+        node.scrollTop,
+        node.offsetTop,
+        getTitles(node),
+        getOffsets(node),
+        true,
+        node.clientWidth,
+        q[0],
+      );
+      const resizeObserver = new ResizeObserver(() => {
+        blogContainer.resize(getOffsets(node), node.clientWidth);
+      });
+      resizeObserver.observe(node);
+    },
+    [blogContainer],
+  );
+
   useEffect(() => {
     if (!params.blogid) return;
     async function fetchData() {
-      console.log(`fetch ${decode64(decodeURI(params.blogid))}.md`);
-      await fetch(`/markdowns${decode64(decodeURI(params.blogid))}.md`)
+      console.log(`fetch ${decodeURI(decode64(params.blogid))}.md`);
+      await fetch(`/markdowns${decodeURI(decode64(params.blogid))}.md`)
         .then((r) => r.text())
         .then((text) => setData(metaProperty(text)));
       setIsLoading(false);
@@ -53,8 +87,10 @@ const Blog = observer(({ blogContainer }) => {
               sources={sources}
             />
           </div>
-          <MarkdownContainer data={data} blogContainer={blogContainer}
-            sources={sources} setSources={setSources} handleSlide={handleSlide} />
+          <div ref={ref} id="blog-container" className="blog-link">
+            <MarkdownContainer data={data} blogContainer={blogContainer}
+              sources={sources} setSources={setSources} handleSlide={handleSlide} />
+          </div>
           <Sidebar blogContainer={blogContainer} />
           <div id="footer"></div>
         </>
