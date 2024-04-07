@@ -2,10 +2,10 @@
   "assetsByChunkName": {
     "main": [
       "main.css",
-      "js/main.041580c0.bundle.js"
+      "js/main.e67ea82d.bundle.js"
     ],
     "react-related": [
-      "js/react-related.126ebcb5.bundle.js"
+      "js/react-related.aae962eb.bundle.js"
     ],
     "vendors": [
       "js/vendors.6d089385.bundle.js"
